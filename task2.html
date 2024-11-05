@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input:focus, select:focus {
+      border-color: #007bff;
+    }
+    .error-message {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h2>Простой калькулятор</h2>
+    <label>Число 1:
+      <input type="number" id="num1" />
+    </label>
+    <label>Число 2:
+      <input type="number" id="num2" />
+    </label>
+    <label>Операция:
+      <select id="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+    </label>
+    <button onclick="calculate()">Посчитать</button>
+    <div id="errorMessage" class="error-message"></div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const num1 = document.getElementById("num1").value;
+      const num2 = document.getElementById("num2").value;
+      const operation = document.getElementById("operation").value;
+      const errorMessage = document.getElementById("errorMessage");
+      const resultDisplay = document.getElementById("result");
+
+      errorMessage.innerHTML = "";
+      resultDisplay.innerHTML = "";
+
+      if (!num1 || !num2) {
+        errorMessage.innerText = "Пожалуйста, введите оба числа";
+        return;
+      }
+
+      const n1 = parseFloat(num1);
+      const n2 = parseFloat(num2);
+      let result;
+
+      switch (operation) {
+        case "+": result = n1 + n2; break;
+        case "-": result = n1 - n2; break;
+        case "*": result = n1 * n2; break;
+        case "/": result = n2 !== 0 ? n1 / n2 : "Деление на ноль!"; break;
+        default: result = "Неизвестная операция";
+      }
+
+      resultDisplay.innerText = `Результат: ${result}`;
+    }
+  </script>
+</body>
+</html>

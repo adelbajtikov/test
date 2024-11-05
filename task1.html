@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #007bff;
+    }
+    .error {
+      border-color: #e74c3c;
+    }
+    .error-message {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Форма регистрации</h2>
+  <form id="registrationForm">
+    <label>Имя:
+      <input type="text" id="name" />
+    </label>
+    <div id="nameError" class="error-message"></div>
+    
+    <label>Email:
+      <input type="email" id="email" />
+    </label>
+    <div id="emailError" class="error-message"></div>
+    
+    <label>Пароль:
+      <input type="password" id="password" />
+    </label>
+    <div id="passwordError" class="error-message"></div>
+    
+    <button type="button" onclick="validateForm()">Отправить</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      let isValid = true;
+      document.querySelectorAll(".error-message").forEach(e => e.innerHTML = "");
+      document.querySelectorAll("input").forEach(input => input.classList.remove("error"));
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (name === "") {
+        document.getElementById("nameError").innerText = "Имя не может быть пустым";
+        document.getElementById("name").classList.add("error");
+        isValid = false;
+      }
+      if (!email.includes("@") || !email.includes(".")) {
+        document.getElementById("emailError").innerText = "Некорректный email";
+        document.getElementById("email").classList.add("error");
+        isValid = false;
+      }
+      if (password.length < 8) {
+        document.getElementById("passwordError").innerText = "Пароль должен содержать минимум 8 символов";
+        document.getElementById("password").classList.add("error");
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert("Форма успешно отправлена!");
+      }
+    }
+  </script>
+</body>
+</html>
